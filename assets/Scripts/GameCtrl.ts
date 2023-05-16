@@ -6,6 +6,7 @@ import { Results } from './Results';
 import { Bird } from './Bird';  
 import { PipePool } from './PipePool';
 import { BirdAudio } from './BirdAudio';
+import { MenuGame } from './MenuGame';
 
 @ccclass('GameCtrl')
 export class GameCtrl extends Component {
@@ -48,8 +49,8 @@ export class GameCtrl extends Component {
     public pipeSpeed: number = 200;
 
     public isOver: boolean;
-
     onLoad() {
+    
         //User cần click phím để bắt đầu
         this.initListener();
         //Điểm sẽ reset lại 
@@ -61,21 +62,22 @@ export class GameCtrl extends Component {
     }
 
     initListener() {
-
+       
         // input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
-
-        this.node.on(Node.EventType.TOUCH_START, () => {
             
-            if(this.isOver == true) {
-                this.resetGame();
-                this.bird.resetBird();
-                this.startGame();
-            }
-            if(this.isOver == false) {
-                this.bird.fly();
-                this.clip.onAudioQueue(0);
-            }
-        })
+            this.node.on(Node.EventType.TOUCH_START, () => {
+             
+                if(this.isOver == true) {
+                    this.resetGame();
+                    this.bird.resetBird();
+                    this.startGame();
+                }
+                if(this.isOver == false) {
+                    this.bird.fly();
+                    this.clip.onAudioQueue(0);
+                }
+            })
+       
     } 
 
     //testing method DELETE ME IN FINAL VERSION
@@ -152,15 +154,16 @@ export class GameCtrl extends Component {
         if(this.isOver == false) {
             this.birdStruck();
         }
+        
+        // không cho con chim xoay ( đang fix)
+        // this.speed -= 0.05;
+        // this.bird.birdLocation.y += this.speed;
 
-        this.speed -= 0.05;
-        this.bird.birdLocation.y += this.speed;
-
-        var angle = -(this.speed/2) * 30;
-        if (angle >= 30) {
-            angle = 30;
-        }
-        this.bird.birdLocation.z = angle;
+        // var angle = -(this.speed/2) * 30;
+        // if (angle >= 30) {
+        //     angle = 30;
+        // }
+        // this.bird.birdLocation.z = angle;
     }
 }
 
