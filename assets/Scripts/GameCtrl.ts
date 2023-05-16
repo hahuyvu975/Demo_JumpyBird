@@ -65,6 +65,7 @@ export class GameCtrl extends Component {
         // input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
 
         this.node.on(Node.EventType.TOUCH_START, () => {
+            
             if(this.isOver == true) {
                 this.resetGame();
                 this.bird.resetBird();
@@ -151,6 +152,15 @@ export class GameCtrl extends Component {
         if(this.isOver == false) {
             this.birdStruck();
         }
+
+        this.speed -= 0.05;
+        this.bird.birdLocation.y += this.speed;
+
+        var angle = -(this.speed/2) * 30;
+        if (angle >= 30) {
+            angle = 30;
+        }
+        this.bird.birdLocation.z = angle;
     }
 }
 
