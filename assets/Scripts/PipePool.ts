@@ -9,17 +9,17 @@ export class PipePool extends Component {
     @property({
         type: Prefab,
     })
-    public prefabPipes = null;
+    private prefabPipes = null;
 
     @property({
         type: Node,
     })
-    public pipePoolHome;
+    private pipePoolHome;
 
-    public pool = new NodePool();
-    public createPipe;
+    private pool = new NodePool();
+    private createPipe;
 
-    initPool() {
+    initPool(): void {
          let initCount = 3;
 
          for(let i = 0; i < initCount; i++) {
@@ -33,7 +33,7 @@ export class PipePool extends Component {
          }   
     }
 
-    addPool() {
+    addPool(): void {
 
         if(this.pool.size() > 0) {
             this.createPipe = this.pool.get();
@@ -44,7 +44,7 @@ export class PipePool extends Component {
         this.pipePoolHome.addChild(this.createPipe)
     }
 
-    reset() {
+    reset(): void {
 
         this.pipePoolHome.removeAllChildren();
         this.pool.clear();

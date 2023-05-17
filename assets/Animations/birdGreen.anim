@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "birdAnimation",
+    "_name": "birdGreen",
     "_objFlags": 0,
     "__editorExtras__": {
       "embeddedPlayerGroups": []
@@ -65,23 +65,23 @@
     ],
     "_values": [
       {
-        "__uuid__": "a8087d9d-3662-4b58-b9c5-6ec767b988a3@f9941",
+        "__uuid__": "a9502cb4-2870-4a1f-9dca-7f19a04fe2a1@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "51c5f2b6-e18a-466f-89a1-14a668dd8bd7@f9941",
+        "__uuid__": "90c99256-c831-4e75-8f57-14a73c75ecba@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "3da771a5-303a-4b54-a2f4-faf82037038a@f9941",
+        "__uuid__": "f9ea34c6-a253-4fd6-a170-8f4ca2900af6@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "51c5f2b6-e18a-466f-89a1-14a668dd8bd7@f9941",
+        "__uuid__": "90c99256-c831-4e75-8f57-14a73c75ecba@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "a8087d9d-3662-4b58-b9c5-6ec767b988a3@f9941",
+        "__uuid__": "a9502cb4-2870-4a1f-9dca-7f19a04fe2a1@f9941",
         "__expectedType__": "cc.SpriteFrame"
       }
     ]

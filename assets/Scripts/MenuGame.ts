@@ -9,17 +9,17 @@ export class MenuGame extends Component {
     @property({
         type: Button
     })
-    public btnPlay: Button;
+    private btnPlay: Button;
 
     @property({
         type: Button
     })
-    public btnOption: Button;
+    private btnOption: Button;
 
     @property({
         type: Label
     })
-    public labelMenu: Label;
+    private labelMenu: Label;
 
     // @property({
     //     type: AudioSource
@@ -27,13 +27,13 @@ export class MenuGame extends Component {
     // public birdAudio: BirdAudio;
 
 
-    PLAYGAME() {
+    protected PLAYGAME(): void {
         director.loadScene('game')
         // this.gameCtrl.node.active = true;
     }
 
-   OPTION() {
-       director.loadScene('option')
+    protected OPTION(): void {
+        director.loadScene('option')
 
     }
 }

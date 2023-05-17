@@ -598,7 +598,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Bird",
+    "_name": "BirdYellow",
     "_objFlags": 0,
     "_parent": {
       "__id__": 7
@@ -931,10 +931,14 @@
       {
         "__uuid__": "24c6b105-a7f3-4379-9e59-e296de5ba810",
         "__expectedType__": "cc.AnimationClip"
+      },
+      {
+        "__uuid__": "657fe6a8-a25c-4629-b787-d5915be00a18",
+        "__expectedType__": "cc.AnimationClip"
       }
     ],
     "_defaultClip": {
-      "__uuid__": "24c6b105-a7f3-4379-9e59-e296de5ba810",
+      "__uuid__": "657fe6a8-a25c-4629-b787-d5915be00a18",
       "__expectedType__": "cc.AnimationClip"
     },
     "_id": "11ePSX5RRJVLZAYNzqkjE6"
@@ -1134,10 +1138,14 @@
       {
         "__uuid__": "24c6b105-a7f3-4379-9e59-e296de5ba810",
         "__expectedType__": "cc.AnimationClip"
+      },
+      {
+        "__uuid__": "1cba5373-090b-49b3-8dc9-0d506342e2d1",
+        "__expectedType__": "cc.AnimationClip"
       }
     ],
     "_defaultClip": {
-      "__uuid__": "24c6b105-a7f3-4379-9e59-e296de5ba810",
+      "__uuid__": "1cba5373-090b-49b3-8dc9-0d506342e2d1",
       "__expectedType__": "cc.AnimationClip"
     },
     "_id": "36wLDBDU9DhbuPyhjxP9KG"

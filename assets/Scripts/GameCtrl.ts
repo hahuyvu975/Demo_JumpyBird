@@ -15,46 +15,50 @@ export class GameCtrl extends Component {
         type: Ground,
         tooltip: 'this is ground'
     })
-    public ground: Ground
+    private ground: Ground
 
     @property({
         type: Results,
         tooltip: 'results go here'
     })
-    public result: Results
+    private result: Results
 
     @property({
         type: Bird
     })
-    public bird: Bird;
+    private bird: Bird;
 
     @property({
         type: PipePool
     })
-    public pipeQueue: PipePool;
+    private pipeQueue: PipePool;
 
     @property({
         type: AudioCtrl
     })
-    public audioCtrl: AudioCtrl;
+    private audioCtrl: AudioCtrl;
 
     @property({
         type: Node,
         tooltip: 'this is btnSound'
     })
-    public btnSound: Node;
+    private btnSound: Node;
 
     @property({
         type: CCInteger,
     })
-    public speed: number = 300;
+    private speed: number = 300;
 
     @property({
         type: CCInteger,
     })
-    public pipeSpeed: number = 200;
+    private pipeSpeed: number = 200;
 
-    public isOver: boolean;
+    private isOver: boolean;
+
+    getSpeedGameCtrl() {
+        return this.speed;
+    }
     onLoad() {
     
         //User cần click phím để bắt đầu
@@ -105,12 +109,12 @@ export class GameCtrl extends Component {
         }
     }
 
-    startGame() {
+    startGame(): void  {
         this.result.hideResults();
         director.resume()
     }
 
-    gameOver() {
+    gameOver(): void  {
 
         this.result.showResults()
         this.isOver = true;
@@ -121,7 +125,7 @@ export class GameCtrl extends Component {
         
     }
 
-    resetGame() {
+    resetGame(): void  {
         this.result.resetScore()
         this.pipeQueue.reset()
         this.isOver = false;
@@ -130,19 +134,19 @@ export class GameCtrl extends Component {
     }
     
     //vượt qua ống
-    passPipe() {
+    passPipe(): void  {
         this.result.addScore()
         if(this.btnSound.getChildByName('btnOn').active == true){
             this.audioCtrl.onPlaySoundEffect(1)
         }
     }
 
-    createPipe() {
+    createPipe(): void  {
         this.pipeQueue.addPool();
     }
 
     // va chamj
-    contactGroundPipe() {
+    contactGroundPipe(): void  {
         let collider = this.bird.getComponent(Collider2D)
         if(collider) {
             collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this)
@@ -150,14 +154,14 @@ export class GameCtrl extends Component {
     
     }
 
-    onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
+    onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null): void  {
         this.bird.hitSomething = true;
         if(this.btnSound.getChildByName('btnOn').active == true){
             this.audioCtrl.onPlaySoundEffect(2)
         }
     }
 
-    birdStruck() {
+    birdStruck(): void  {
         this.contactGroundPipe();
 
         if(this.bird.hitSomething === true) {

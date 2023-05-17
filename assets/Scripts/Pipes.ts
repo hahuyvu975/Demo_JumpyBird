@@ -14,23 +14,23 @@ export class Pipes extends Component {
         type: Node,
         tooltip: 'Top Pipe'
     })
-    public topPipe: Node;
+    private topPipe: Node;
   
     @property({
         type: Node,
         tooltip: 'Bottom Pipe'
     })
-    public bottomPipe: Node;
+    private bottomPipe: Node;
 
-    public tempStartLocationUp: Vec3 = new Vec3(0, 0, 0);
-    public tempStartLocationDown: Vec3 = new Vec3(0, 0, 0);
-    public scene = screen.windowSize; // set kích thước cửa số trò chơi
+    private tempStartLocationUp: Vec3 = new Vec3(0, 0, 0);
+    private tempStartLocationDown: Vec3 = new Vec3(0, 0, 0);
+    private scene = screen.windowSize; // set kích thước cửa số trò chơi
 
-    public game ; // tốc độ của đường ống từ GameCtrl
-    public pipeSpeed: number // tốc độ cuối cùng của đường ống
-    public tempSpeed: number // tốc độ tạm thời
+    private game ; // tốc độ của đường ống từ GameCtrl
+    private pipeSpeed: number // tốc độ cuối cùng của đường ống
+    private tempSpeed: number // tốc độ tạm thời
 
-    isPass: boolean;
+    private isPass: boolean;
 
     onLoad() {
         this.game = find("GameCtrl").getComponent("GameCtrl");
@@ -40,7 +40,7 @@ export class Pipes extends Component {
     }
 
     // xử lý logic đường ống ngẫu nhiên cap hay thấp trong game
-    initPos() {
+    initPos(): void {
 
         this.tempStartLocationUp.x = (this.topPipe.getComponent(UITransform).width + this.scene.width)
         this.tempStartLocationDown.x = (this.topPipe.getComponent(UITransform).width + this.scene.width)
@@ -57,7 +57,7 @@ export class Pipes extends Component {
     }
 
     // sự kiện được update liên tục khi trò chơi đang diễn ra
-    update(deltaTime) {
+    update(deltaTime: number): void {
 
         this.tempSpeed = this.pipeSpeed * deltaTime;
 
@@ -78,8 +78,9 @@ export class Pipes extends Component {
         }
 
         if(this.topPipe.position.x < (0 - this.scene.width)){
-            this.game.createPipe();
             this.destroy();
+            this.game.createPipe();
+            
         }
     }
 }

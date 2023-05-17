@@ -8,22 +8,22 @@ export class AudioCtrl extends Component {
         type: AudioClip,
         tooltip: 'Audio Clip here'
     })
-    public audio_clip: AudioClip[] = [];
+    private audio_clip: AudioClip[] = [];
 
     @property({
         type: AudioSource,
         tooltip: 'Audio source here'
     })
-    public audio_source: AudioSource = null;
+    private audio_source: AudioSource = null;
 
 
-    onPlaySoundEffect(index: number) {
-        let audio: AudioClip = this.audio_clip[index];
+    onPlaySoundEffect(index: number): void {
+        let audio  = this.audio_clip[index];
 
         this.audio_source.playOneShot(audio);
     }
 
-    pausePlaySoundEffect() {
+    pausePlaySoundEffect(): void {
             this.audio_source.pause();
     }
     

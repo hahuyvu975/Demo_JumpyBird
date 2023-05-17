@@ -7,61 +7,61 @@ export class Results extends Component {
     @property({
         type: Label
     })
-    public scoreLabel: Label;
+    private scoreLabel: Label;
 
     @property({
         type: Label
     })
-    public highScore: Label;
+    private highScore: Label;
 
     @property({
         type: Label,
         tooltip: 'try Again here'
     })
-    public resultEnd: Label;
+    private resultEnd: Label;
 
-    maxScore: number = 0;
-    currentScore: number;
+    private maxScore: number = 0;
+    private currentScore: number;
     // arryScore: string[] = [];
 
-    updateScore(num: number) {
+    protected updateScore(num: number): void {
         this.currentScore = num; // tham số
-    //    if(localStorage.getItem('maxScore') != null) {
-    //         localStorage.setItem('maxScore',JSON.stringify(this.maxScore))
-    //    }
+        //    if(localStorage.getItem('maxScore') != null) {
+        //         localStorage.setItem('maxScore',JSON.stringify(this.maxScore))
+        //    }
         this.scoreLabel.string = ('' + this.currentScore);
 
-        
+
     }
 
-    resetScore() {
+    resetScore(): void {
         this.updateScore(0)
-        var getDataScore = JSON.parse(localStorage.getItem('maxScore'))
-        this.maxScore = getDataScore;
+        // var getDataScore = JSON.parse(localStorage.getItem('maxScore'))
+        // this.maxScore = getDataScore;
         this.hideResults();
 
     }
 
-    addScore() {
+    addScore(): void {
 
         this.updateScore(this.currentScore + 1)
-        
+
 
     }
 
-    showResults() {
+    showResults(): void {
         this.maxScore = Math.max(this.maxScore, this.currentScore)
-        if(localStorage.getItem('maxScore') || JSON.parse(localStorage.getItem('maxScore')).length === 0){
+        if (localStorage.getItem('maxScore') || JSON.parse(localStorage.getItem('maxScore')).length === 0) {
             localStorage.setItem('maxScore', JSON.stringify(this.maxScore));
         }
         this.highScore.string = `High Score: ${this.maxScore}`;
-       
+
 
         this.resultEnd.node.active = true;
         this.highScore.node.active = true;
     }
 
-    hideResults() {
+    hideResults(): void {
         this.highScore.node.active = false;
         this.resultEnd.node.active = false;
     }

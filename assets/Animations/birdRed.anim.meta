@@ -2,12 +2,12 @@
   "ver": "2.0.3",
   "importer": "animation-clip",
   "imported": true,
-  "uuid": "24c6b105-a7f3-4379-9e59-e296de5ba810",
+  "uuid": "1cba5373-090b-49b3-8dc9-0d506342e2d1",
   "files": [
     ".cconb"
   ],
   "subMetas": {},
   "userData": {
-    "name": "birdAnimation"
+    "name": "birdRed"
   }
 }
