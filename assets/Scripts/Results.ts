@@ -54,7 +54,7 @@ export class Results extends Component {
         if(localStorage.getItem('maxScore') || JSON.parse(localStorage.getItem('maxScore')).length === 0){
             localStorage.setItem('maxScore', JSON.stringify(this.maxScore));
         }
-        this.highScore.string = 'High Score: ' + this.maxScore;
+        this.highScore.string = `High Score: ${this.maxScore}`;
        
 
         this.resultEnd.node.active = true;

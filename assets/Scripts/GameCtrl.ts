@@ -5,7 +5,7 @@ import { Ground } from './Ground';
 import { Results } from './Results';
 import { Bird } from './Bird';  
 import { PipePool } from './PipePool';
-import { BirdAudio } from './BirdAudio';
+import { AudioCtrl } from './AudioCtrl';
 import { MenuGame } from './MenuGame';
 
 @ccclass('GameCtrl')
@@ -34,9 +34,15 @@ export class GameCtrl extends Component {
     public pipeQueue: PipePool;
 
     @property({
-        type: BirdAudio
+        type: AudioCtrl
     })
-    public clip: BirdAudio;
+    public audioCtrl: AudioCtrl;
+
+    @property({
+        type: Node,
+        tooltip: 'this is btnSound'
+    })
+    public btnSound: Node;
 
     @property({
         type: CCInteger,
@@ -63,7 +69,7 @@ export class GameCtrl extends Component {
 
     initListener() {
        
-        // input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
+            input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
             
             this.node.on(Node.EventType.TOUCH_START, () => {
              
@@ -74,27 +80,30 @@ export class GameCtrl extends Component {
                 }
                 if(this.isOver == false) {
                     this.bird.fly();
-                    this.clip.onAudioQueue(0);
+                    if(this.btnSound.getChildByName('btnOn').active == true){
+                        this.audioCtrl.onPlaySoundEffect(0)
+                    }
+                    
                 }
             })
        
     } 
 
     //testing method DELETE ME IN FINAL VERSION
-    // onKeyDown(event: EventKeyboard) {
-    //     switch (event.keyCode) {
-    //         case KeyCode.KEY_A:
-    //             this.gameOver();
-    //             break;
-    //         case KeyCode.KEY_P:
-    //             this.result.addScore();
-    //             break;
-    //         case KeyCode.KEY_Q:
-    //             this.resetGame();
-    //             this.bird.resetBird();
+    onKeyDown(event: EventKeyboard) {
+        switch (event.keyCode) {
+            case KeyCode.KEY_A:
+                this.btnSound.getChildByName('btnOn').active = true;
+                this.btnSound.getChildByName('btnOff').active = false;
+                break;
+            case KeyCode.KEY_S:
+                this.btnSound.getChildByName('btnOn').active = false;
+                this.btnSound.getChildByName('btnOff').active = true;
+                break;
+           
 
-    //     }
-    // }
+        }
+    }
 
     startGame() {
         this.result.hideResults();
@@ -106,7 +115,10 @@ export class GameCtrl extends Component {
         this.result.showResults()
         this.isOver = true;
         director.pause();
-        this.clip.onAudioQueue(3);
+        if(this.btnSound.getChildByName('btnOn').active == true){
+            this.audioCtrl.onPlaySoundEffect(3)
+        }
+        
     }
 
     resetGame() {
@@ -120,7 +132,9 @@ export class GameCtrl extends Component {
     //vượt qua ống
     passPipe() {
         this.result.addScore()
-        this.clip.onAudioQueue(1);
+        if(this.btnSound.getChildByName('btnOn').active == true){
+            this.audioCtrl.onPlaySoundEffect(1)
+        }
     }
 
     createPipe() {
@@ -138,7 +152,9 @@ export class GameCtrl extends Component {
 
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
         this.bird.hitSomething = true;
-        this.clip.onAudioQueue(2);
+        if(this.btnSound.getChildByName('btnOn').active == true){
+            this.audioCtrl.onPlaySoundEffect(2)
+        }
     }
 
     birdStruck() {
@@ -146,6 +162,7 @@ export class GameCtrl extends Component {
 
         if(this.bird.hitSomething === true) {
             this.gameOver()
+            
         }
 
     }
@@ -153,6 +170,7 @@ export class GameCtrl extends Component {
     update() {
         if(this.isOver == false) {
             this.birdStruck();
+            
         }
         
         // không cho con chim xoay ( đang fix)
