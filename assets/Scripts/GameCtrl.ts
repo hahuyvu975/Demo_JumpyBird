@@ -1,4 +1,5 @@
-import { _decorator, Component, Node, CCInteger, input, Input, EventKeyboard, KeyCode, director, Contact2DType, Collider2D, IPhysics2DContact } from 'cc';
+import { StoredBird } from './StoredBird';
+import { _decorator, Component, Node, CCInteger, input, Input, EventKeyboard, KeyCode, director, Contact2DType, Collider2D, IPhysics2DContact, find, Sprite, Color } from 'cc';
 const { ccclass, property } = _decorator;
 
 import { Ground } from './Ground';
@@ -7,6 +8,8 @@ import { Bird } from './Bird';
 import { PipePool } from './PipePool';
 import { AudioCtrl } from './AudioCtrl';
 import { MenuGame } from './MenuGame';
+// import { Stored } from './Stored';
+// import { Stored } from './Stored';
 
 @ccclass('GameCtrl')
 export class GameCtrl extends Component {
@@ -56,11 +59,30 @@ export class GameCtrl extends Component {
 
     private isOver: boolean;
 
+    // @property({
+    //     type: Sprite
+    // })
+    // birdSprite : Sprite = null;
+
     getSpeedGameCtrl() {
         return this.speed;
     }
     onLoad() {
-    
+        
+        let colorb = find('StateNode')
+        let colorPara = colorb.getComponent(StoredBird)
+        console.log(colorPara)
+        if(colorPara.temp == 1){
+            let birdSprite = this.bird.getComponent(Sprite);
+            birdSprite.color = Color.GREEN;
+        }else if(colorPara.temp == 2) {
+            let birdSprite1 = this.bird.getComponent(Sprite);
+            birdSprite1.color = Color.YELLOW;
+        }else {
+            let birdSprite2 = this.bird.getComponent(Sprite);
+            birdSprite2.color = Color.RED;
+        }
+
         //User cần click phím để bắt đầu
         this.initListener();
         //Điểm sẽ reset lại 
