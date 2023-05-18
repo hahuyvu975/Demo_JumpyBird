@@ -69,6 +69,21 @@ export class GameCtrl extends Component {
     }
 
     getBirdColor(): void {
+        
+    }
+    onLoad() {
+
+       
+        //User need to click for start
+        this.initListener();
+        //Score will reset  
+        this.result.resetScore();
+        //..
+        this.isOver = true;
+        //Game pause when start
+        director.pause();
+
+        // check
         let colorb = find('StateNode')
         let colorPara = colorb.getComponent(StoredBird)
         console.log(colorPara)
@@ -82,18 +97,6 @@ export class GameCtrl extends Component {
             let birdSpriteRed = this.bird.getComponent(Sprite);
             birdSpriteRed.color = Color.RED;
         }
-    }
-    onLoad() {
-
-
-        //User need to click for start
-        this.initListener();
-        //Score will reset  
-        this.result.resetScore();
-        //..
-        this.isOver = true;
-        //Game pause when start
-        director.pause();
     }
 
     initListener() {
