@@ -20,11 +20,6 @@ export class OptionGame extends Component {
     })
     private labelChoosen: Label;
 
-    @property({
-        type: ChangeColor
-    })
-    private changeColor: ChangeColor;
-
     protected BACK_MENU(): void {
         director.loadScene('menu');
     }

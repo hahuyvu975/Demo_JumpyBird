@@ -42,7 +42,7 @@ export class ChangeColor extends Component {
     onChooseYellow(): void {
         console.log("Yellow")
         this.indexObj = 2;
-       
+       console.log(this.indexObj);
 
         this.btnYellow.node.active = true;
         this.btnGreen.node.active = false;

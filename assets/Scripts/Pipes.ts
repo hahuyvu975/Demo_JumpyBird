@@ -5,8 +5,6 @@ const random = (min, max) => {
     return Math.random() * (max - min) + min
 }
 
-import { GameCtrl } from './GameCtrl';
-
 @ccclass('Pipes')
 export class Pipes extends Component {
    
@@ -46,7 +44,7 @@ export class Pipes extends Component {
         this.tempStartLocationDown.x = (this.topPipe.getComponent(UITransform).width + this.scene.width)
 
         let gap = random(90,100)
-        let topHeight = random (0, 450)
+        let topHeight = random(0, 450)
 
         this.tempStartLocationUp.y = topHeight;
         this.tempStartLocationDown.y = (topHeight - (gap *10))
@@ -72,14 +70,13 @@ export class Pipes extends Component {
 
         if(this.isPass == false && this.topPipe.position.x <= 0) {
             this.isPass = true;
-            this.game.passPipe();
-
-           
+            this.game.passPipe();  
         }
 
         if(this.topPipe.position.x < (0 - this.scene.width)){
-            this.destroy();
+            
             this.game.createPipe();
+            this.destroy();
             
         }
     }

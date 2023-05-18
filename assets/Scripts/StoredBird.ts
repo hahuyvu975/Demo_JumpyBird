@@ -7,12 +7,16 @@ export class StoredBird extends Component {
     // private green: boolean;
     // private red: boolean;
     // private yellow: boolean;
-    public temp = null;
+    private temp = null;
+
+    getTemp() {
+        return this.temp;
+    }
 
     @property({
         type: ChangeColor
     })
-    public changeColor: ChangeColor;
+    private changeColor: ChangeColor;
     
 
     protected OK_MENU(): void {

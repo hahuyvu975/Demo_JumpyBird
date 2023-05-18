@@ -1,5 +1,4 @@
-import { StoredBird } from './StoredBird';
-import { _decorator, Component, Node, CCInteger, input, Input, EventKeyboard, KeyCode, director, Contact2DType, Collider2D, IPhysics2DContact, find, Sprite, Color } from 'cc';
+import { _decorator, Component, Node, CCInteger, input, Input, EventKeyboard, KeyCode, director, Contact2DType, Collider2D, IPhysics2DContact, find, Sprite, Color, Button } from 'cc';
 const { ccclass, property } = _decorator;
 
 import { Ground } from './Ground';
@@ -8,6 +7,7 @@ import { Bird } from './Bird';
 import { PipePool } from './PipePool';
 import { AudioCtrl } from './AudioCtrl';
 import { MenuGame } from './MenuGame';
+import { StoredBird } from './StoredBird';
 // import { Stored } from './Stored';
 // import { Stored } from './Stored';
 
@@ -47,6 +47,12 @@ export class GameCtrl extends Component {
     })
     private btnSound: Node;
 
+    // @property({
+    //     type: Button,
+    //     tooltip: 'this is btnSound'
+    // })
+    // private btnHome: Button;
+
     @property({
         type: CCInteger,
     })
@@ -68,12 +74,9 @@ export class GameCtrl extends Component {
         return this.speed;
     }
 
-    getBirdColor(): void {
-        
-    }
     onLoad() {
 
-       
+
         //User need to click for start
         this.initListener();
         //Score will reset  
@@ -83,14 +86,14 @@ export class GameCtrl extends Component {
         //Game pause when start
         director.pause();
 
-        // check
+        // user choose different bird color
         let colorb = find('StateNode')
         let colorPara = colorb.getComponent(StoredBird)
         console.log(colorPara)
-        if (colorPara.temp == 1) {
+        if (colorPara.getTemp() == 1) {
             let birdSpriteGreen = this.bird.getComponent(Sprite);
             birdSpriteGreen.color = Color.GREEN;
-        } else if (colorPara.temp == 2) {
+        } else if (colorPara.getTemp() == 2) {
             let birdSpriteYellow = this.bird.getComponent(Sprite);
             birdSpriteYellow.color = Color.YELLOW;
         } else {
@@ -104,7 +107,6 @@ export class GameCtrl extends Component {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
 
         this.node.on(Node.EventType.TOUCH_START, () => {
-
 
             if (this.isOver == true) {
                 this.resetGame();
@@ -122,7 +124,7 @@ export class GameCtrl extends Component {
 
     }
 
-    //testing method DELETE ME IN FINAL VERSION
+    // testing method DELETE ME IN FINAL VERSION
     onKeyDown(event: EventKeyboard) {
         switch (event.keyCode) {
             case KeyCode.KEY_A:
@@ -133,15 +135,32 @@ export class GameCtrl extends Component {
                 this.btnSound.getChildByName('btnOn').active = false;
                 this.btnSound.getChildByName('btnOff').active = true;
                 break;
+            case KeyCode.KEY_D:
+                director.loadScene('menu')
+                break;
 
 
         }
     }
 
+    backMenu(): void {
+        director.loadScene('menu');
+    }
+
+    // turnOnSound(): void {
+    //     this.btnSound.getChildByName('btnOn').active = true;
+    //     this.btnSound.getChildByName('btnOff').active = false;
+    // }
+
+    // turnOffSound(): void {
+    //     this.btnSound.getChildByName('btnOn').active = false;
+    //     this.btnSound.getChildByName('btnOff').active = true;
+    // }
+
     startGame(): void {
         this.result.hideResults();
         director.resume()
-        
+
     }
 
     gameOver(): void {
