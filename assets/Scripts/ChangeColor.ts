@@ -13,7 +13,7 @@ export class ChangeColor extends Component {
         type: Button,
         tooltip: 'btnGreen'
     })
-    public btnGreen: Button;
+    private btnGreen: Button;
 
     @property({
         type: Button,
@@ -21,7 +21,7 @@ export class ChangeColor extends Component {
     })
     private btnRed: Button;
 
-    public newBird = null ;
+    public indexObj = null ;
     
     // get valueYellow() {
     //     return this.btnGreen;
@@ -41,7 +41,7 @@ export class ChangeColor extends Component {
 
     onChooseYellow(): void {
         console.log("Yellow")
-        this.newBird = 2;
+        this.indexObj = 2;
        
 
         this.btnYellow.node.active = true;
@@ -51,7 +51,7 @@ export class ChangeColor extends Component {
 
     onChooseGreen(): void {
         console.log("Green")
-        this.newBird = 1   
+        this.indexObj = 1   
         
         this.btnYellow.node.active = false;
         this.btnGreen.node.active = true;
@@ -60,8 +60,8 @@ export class ChangeColor extends Component {
 
     onChooseRed(): void {
         console.log("Red")
-        this.newBird = 3
-
+        this.indexObj = 3
+        console.log(this.indexObj)
         this.btnYellow.node.active = false;
         this.btnGreen.node.active = false;
         this.btnRed.node.active = true;

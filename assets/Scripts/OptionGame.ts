@@ -25,15 +25,6 @@ export class OptionGame extends Component {
     })
     private changeColor: ChangeColor;
 
-    @property({
-        type: Node
-    })
-    private NodeStored: Node;
-
-    private birdDefault;    
-    private newBird ;
-
-
     protected BACK_MENU(): void {
         director.loadScene('menu');
     }

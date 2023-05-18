@@ -13,9 +13,10 @@ export class StoredBird extends Component {
         type: ChangeColor
     })
     public changeColor: ChangeColor;
+    
 
     protected OK_MENU(): void {
-        this.temp = this.changeColor.newBird;
+        this.temp = this.changeColor.indexObj;
         // console.log(temp)
         director.addPersistRootNode(this.node);
         director.loadScene('game');
