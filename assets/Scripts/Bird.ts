@@ -20,27 +20,19 @@ export class Bird extends Component {
     private birdLocation: Vec3;
     public hitSomething: boolean;
 
-
-
-    // getHitSomething(){
-    //     return this.hitSomething;
-    // }
-
-    onLoad(): void {
+    protected onLoad(): void {
         this.resetBird();
-
         this.birdAnimation = this.getComponent(Animation);
     }
     // init object Vec3 for birdLocation and set position again
-    resetBird(): void {
+    public resetBird(): void {
         this.birdLocation = new Vec3(0, 0, 0);
         this.node.setPosition(this.birdLocation);
         this.hitSomething = false;
     }
 
-    fly(): void {
+    public fly(): void {
         // this.birdAnimation.stop();
-        // tạo hoạt ảnh lên xuống mượt mà hơn
         tween(this.node.position)
             .to(this.jumpDuration, new Vec3(this.node.position.x, this.node.position.y + this.jumpHeight, 0), {
                 easing: "smooth",

@@ -22,49 +22,33 @@ export class Results extends Component {
 
     private maxScore: number = 0;
     private currentScore: number;
-    // arryScore: string[] = [];
 
     protected updateScore(num: number): void {
         this.currentScore = num; // tham số
-        //    if(localStorage.getItem('maxScore') != null) {
-        //         localStorage.setItem('maxScore',JSON.stringify(this.maxScore))
-        //    }
         this.scoreLabel.string = ('' + this.currentScore);
-
-
     }
 
-    resetScore(): void {
-        this.updateScore(0)
-        // var getDataScore = JSON.parse(localStorage.getItem('maxScore'))
-        // this.maxScore = getDataScore;
+    public resetScore(): void {
+        this.updateScore(0);
         this.hideResults();
 
     }
 
-    addScore(): void {
-
-        this.updateScore(this.currentScore + 1)
-
-
+    public addScore(): void {
+        this.updateScore(this.currentScore + 1);
     }
 
-    showResults(): void {
-        this.maxScore = Math.max(this.maxScore, this.currentScore)
-        if (localStorage.getItem('maxScore') || JSON.parse(localStorage.getItem('maxScore')).length === 0) {
-            localStorage.setItem('maxScore', JSON.stringify(this.maxScore));
-        }
+    public showResults(): void {
+        this.maxScore = Math.max(this.maxScore, this.currentScore);
+        localStorage.setItem('maxScore', JSON.stringify(this.maxScore));
         this.highScore.string = `High Score: ${this.maxScore}`;
-
-
         this.resultEnd.node.active = true;
         this.highScore.node.active = true;
     }
 
-    hideResults(): void {
+    public hideResults(): void {
         this.highScore.node.active = false;
         this.resultEnd.node.active = false;
     }
-
 }
 

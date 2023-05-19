@@ -1,19 +1,15 @@
-import { _decorator, Component, Node, Vec3, screen, find, Game, UITransform } from 'cc';
+import { _decorator, Component, Node, Vec3, screen, math, find, UITransform, randomRange } from 'cc';
 const { ccclass, property } = _decorator;
-
-const random = (min, max) => {
-    return Math.random() * (max - min) + min
-}
 
 @ccclass('Pipes')
 export class Pipes extends Component {
-   
+
     @property({
         type: Node,
         tooltip: 'Top Pipe'
     })
     private topPipe: Node;
-  
+
     @property({
         type: Node,
         tooltip: 'Bottom Pipe'
@@ -22,62 +18,56 @@ export class Pipes extends Component {
 
     private tempStartLocationUp: Vec3 = new Vec3(0, 0, 0);
     private tempStartLocationDown: Vec3 = new Vec3(0, 0, 0);
-    private scene = screen.windowSize; // set kích thước cửa số trò chơi
+    private scene = screen.windowSize; // set window size game
 
-    private game ; // tốc độ của đường ống từ GameCtrl
-    private pipeSpeed: number // tốc độ cuối cùng của đường ống
-    private tempSpeed: number // tốc độ tạm thời
+    private game: any; // 
+    private pipeSpeed: number; // speed of the pipe
+    private tempSpeed: number; // speed of the temp
 
     private isPass: boolean;
 
-    onLoad() {
-        this.game = find("GameCtrl").getComponent("GameCtrl");
+    protected onLoad(): void {
+        this.game = find("GameCtrl").getComponent('GameCtrl');
         this.pipeSpeed = this.game.pipeSpeed;
         this.initPos();
-        this.isPass = false
+        this.isPass = false;
     }
 
-    // xử lý logic đường ống ngẫu nhiên cap hay thấp trong game
-    initPos(): void {
+    // create random position for the pipe
+    protected initPos(): void {
+        this.tempStartLocationUp.x = this.topPipe.getComponent(UITransform).width + this.scene.width;
+        this.tempStartLocationDown.x = this.bottomPipe.getComponent(UITransform).width + this.scene.width;
 
-        this.tempStartLocationUp.x = (this.topPipe.getComponent(UITransform).width + this.scene.width)
-        this.tempStartLocationDown.x = (this.topPipe.getComponent(UITransform).width + this.scene.width)
-
-        let gap = random(90,100)
-        let topHeight = random(0, 450)
+        let gap = math.randomRangeInt(90, 100);
+        let topHeight = math.randomRangeInt(0, 450);
 
         this.tempStartLocationUp.y = topHeight;
-        this.tempStartLocationDown.y = (topHeight - (gap *10))
+        this.tempStartLocationDown.y = (topHeight - (gap * 10));
 
         this.bottomPipe.setPosition(this.tempStartLocationDown);
         this.topPipe.setPosition(this.tempStartLocationUp);
-
     }
 
-    // sự kiện được update liên tục khi trò chơi đang diễn ra
-    update(deltaTime: number): void {
-
+    protected update(deltaTime: number): void {
         this.tempSpeed = this.pipeSpeed * deltaTime;
 
         this.tempStartLocationDown = this.bottomPipe.position;
         this.tempStartLocationUp = this.topPipe.position;
-
         this.tempStartLocationDown.x -= this.tempSpeed;
         this.tempStartLocationUp.x -= this.tempSpeed;
 
         this.bottomPipe.setPosition(this.tempStartLocationDown);
         this.topPipe.setPosition(this.tempStartLocationUp);
 
-        if(this.isPass == false && this.topPipe.position.x <= 0) {
+        if (this.isPass === false && this.topPipe.position.x <= 0) {
             this.isPass = true;
-            this.game.passPipe();  
+            this.game.passPipe();
         }
 
-        if(this.topPipe.position.x < (0 - this.scene.width)){
-            
-            this.game.createPipe();
+        if (this.topPipe.position.x < -960) {
             this.destroy();
-            
+            // console.log('123');
+            this.game.createPipe();
         }
     }
 }

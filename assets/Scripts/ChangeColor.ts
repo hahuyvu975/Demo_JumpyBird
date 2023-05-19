@@ -3,72 +3,29 @@ const { ccclass, property } = _decorator;
 
 @ccclass('ChangeColor')
 export class ChangeColor extends Component {
-    @property({
-        type: Button,
-        tooltip: 'btnYellow'
-    })
-    private btnYellow: Button;
 
-    @property({
-        type: Button,
-        tooltip: 'btnGreen'
-    })
-    private btnGreen: Button;
+    private indexObj = null;
 
-    @property({
-        type: Button,
-        tooltip: 'btnRed'
-    })
-    private btnRed: Button;
-
-    public indexObj = null ;
-    
-    // get valueYellow() {
-    //     return this.btnGreen;
-    // }
-
-    // get valueGreen() {
-    //     return this.btnGreen;
-    // }
-    
-    // get valueRed() {
-    //     return this.btnRed;
-    // }
-
-    onLoad() {
-       
+    public getIndexObj() {
+        return this.indexObj;
     }
 
-    onChooseYellow(): void {
-        console.log("Yellow")
+    protected onChooseYellow(): void {
+        console.log('Yellow')
         this.indexObj = 2;
-       console.log(this.indexObj);
-
-        this.btnYellow.node.active = true;
-        this.btnGreen.node.active = false;
-        this.btnRed.node.active = false;
+        console.log(this.indexObj);
     }
 
-    onChooseGreen(): void {
+    protected onChooseGreen(): void {
         console.log("Green")
-        this.indexObj = 1   
-        
-        this.btnYellow.node.active = false;
-        this.btnGreen.node.active = true;
-        this.btnRed.node.active = false;
+        this.indexObj = 1
     }
 
-    onChooseRed(): void {
+    protected onChooseRed(): void {
         console.log("Red")
         this.indexObj = 3
         console.log(this.indexObj)
-        this.btnYellow.node.active = false;
-        this.btnGreen.node.active = false;
-        this.btnRed.node.active = true;
     }
-
-    
-
 }
 
 

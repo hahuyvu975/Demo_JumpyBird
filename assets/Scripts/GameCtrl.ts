@@ -6,20 +6,10 @@ import { Results } from './Results';
 import { Bird } from './Bird';
 import { PipePool } from './PipePool';
 import { AudioCtrl } from './AudioCtrl';
-import { MenuGame } from './MenuGame';
 import { StoredBird } from './StoredBird';
-// import { Stored } from './Stored';
-// import { Stored } from './Stored';
 
 @ccclass('GameCtrl')
 export class GameCtrl extends Component {
-
-    @property({
-        type: Ground,
-        tooltip: 'this is ground'
-    })
-    private ground: Ground
-
     @property({
         type: Results,
         tooltip: 'results go here'
@@ -47,12 +37,6 @@ export class GameCtrl extends Component {
     })
     private btnSound: Node;
 
-    // @property({
-    //     type: Button,
-    //     tooltip: 'this is btnSound'
-    // })
-    // private btnHome: Button;
-
     @property({
         type: CCInteger,
     })
@@ -65,18 +49,11 @@ export class GameCtrl extends Component {
 
     private isOver: boolean;
 
-    // @property({
-    //     type: Sprite
-    // })
-    // birdSprite : Sprite = null;
-
-    getSpeedGameCtrl() {
+    public getSpeedGameCtrl() {
         return this.speed;
     }
 
-    onLoad() {
-
-
+    protected onLoad(): void {
         //User need to click for start
         this.initListener();
         //Score will reset  
@@ -85,15 +62,14 @@ export class GameCtrl extends Component {
         this.isOver = true;
         //Game pause when start
         director.pause();
-
         // user choose different bird color
         let colorb = find('StateNode')
-        let colorPara = colorb.getComponent(StoredBird)
-        console.log(colorPara)
-        if (colorPara.getTemp() == 1) {
+        let colorParam = colorb.getComponent(StoredBird)
+        // console.log(colorPara)
+        if (colorParam.getTemp() === 1) {
             let birdSpriteGreen = this.bird.getComponent(Sprite);
             birdSpriteGreen.color = Color.GREEN;
-        } else if (colorPara.getTemp() == 2) {
+        } else if (colorParam.getTemp() === 2) {
             let birdSpriteYellow = this.bird.getComponent(Sprite);
             birdSpriteYellow.color = Color.YELLOW;
         } else {
@@ -102,30 +78,28 @@ export class GameCtrl extends Component {
         }
     }
 
-    initListener() {
+    protected initListener(): void {
 
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
 
         this.node.on(Node.EventType.TOUCH_START, () => {
 
-            if (this.isOver == true) {
+            if (this.isOver === true) {
                 this.resetGame();
                 this.bird.resetBird();
                 this.startGame();
             }
-            if (this.isOver == false) {
+            if (this.isOver === false) {
                 this.bird.fly();
-                if (this.btnSound.getChildByName('btnOn').active == true) {
+                if (this.btnSound.getChildByName('btnOn').active === true) {
                     this.audioCtrl.onPlaySoundEffect(0)
                 }
-
             }
         })
-
     }
 
     // testing method DELETE ME IN FINAL VERSION
-    onKeyDown(event: EventKeyboard) {
+    protected onKeyDown(event: EventKeyboard): void {
         switch (event.keyCode) {
             case KeyCode.KEY_A:
                 this.btnSound.getChildByName('btnOn').active = true;
@@ -135,107 +109,72 @@ export class GameCtrl extends Component {
                 this.btnSound.getChildByName('btnOn').active = false;
                 this.btnSound.getChildByName('btnOff').active = true;
                 break;
-            case KeyCode.KEY_D:
-                director.loadScene('menu')
-                break;
-
-
         }
     }
 
-    backMenu(): void {
-        director.loadScene('menu');
+    protected backMenu(): void {
+        director.loadScene('entry');
     }
 
-    // turnOnSound(): void {
-    //     this.btnSound.getChildByName('btnOn').active = true;
-    //     this.btnSound.getChildByName('btnOff').active = false;
-    // }
-
-    // turnOffSound(): void {
-    //     this.btnSound.getChildByName('btnOn').active = false;
-    //     this.btnSound.getChildByName('btnOff').active = true;
-    // }
-
-    startGame(): void {
+    protected startGame(): void {
         this.result.hideResults();
         director.resume()
-
     }
 
-    gameOver(): void {
-
+    protected gameOver(): void {
         this.result.showResults()
         this.isOver = true;
         director.pause();
-        if (this.btnSound.getChildByName('btnOn').active == true) {
+        if (this.btnSound.getChildByName('btnOn').active === true) {
             this.audioCtrl.onPlaySoundEffect(3)
         }
-
     }
 
-
-    resetGame(): void {
+    protected resetGame(): void {
         this.result.resetScore()
         this.pipeQueue.reset()
         this.isOver = false;
         this.startGame()
-
     }
 
     //action pass pipe
-    passPipe(): void {
+    protected passPipe(): void {
         this.result.addScore()
-        if (this.btnSound.getChildByName('btnOn').active == true) {
+        if (this.btnSound.getChildByName('btnOn').active === true) {
             this.audioCtrl.onPlaySoundEffect(1)
         }
     }
 
-    createPipe(): void {
+    protected createPipe(): void {
         this.pipeQueue.addPool();
     }
 
     // contact 
-    contactGroundPipe(): void {
+    protected contactGroundPipe(): void {
         let collider = this.bird.getComponent(Collider2D)
         if (collider) {
             collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this)
         }
-
     }
 
-    onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null): void {
+    protected onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null): void {
         this.bird.hitSomething = true;
-        if (this.btnSound.getChildByName('btnOn').active == true) {
+        if (this.btnSound.getChildByName('btnOn').active === true) {
             this.audioCtrl.onPlaySoundEffect(2)
         }
     }
 
-    birdStruck(): void {
+    protected birdStruck(): void {
         this.contactGroundPipe();
-
         if (this.bird.hitSomething === true) {
             this.gameOver()
-
         }
-
     }
 
-    update() {
-        if (this.isOver == false) {
+    protected update(): void {
+        if (this.isOver === false) {
             this.birdStruck();
-
         }
-
-        // không cho con chim xoay ( đang fix)
-        // this.speed -= 0.05;
-        // this.bird.birdLocation.y += this.speed;
-
-        // var angle = -(this.speed/2) * 30;
-        // if (angle >= 30) {
-        //     angle = 30;
-        // }
-        // this.bird.birdLocation.z = angle;
     }
 }
 

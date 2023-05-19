@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.SceneAsset",
-    "_name": "menu",
+    "_name": "entry",
     "_objFlags": 0,
     "_native": "",
     "scene": {
@@ -769,7 +769,7 @@
     },
     "component": "",
     "_componentId": "97154Eyv8RJGY5Vt1+pGHOW",
-    "handler": "PLAYGAME",
+    "handler": "playGame",
     "customEventData": ""
   },
   {
@@ -1068,7 +1068,7 @@
     },
     "component": "",
     "_componentId": "97154Eyv8RJGY5Vt1+pGHOW",
-    "handler": "OPTION",
+    "handler": "option",
     "customEventData": ""
   },
   {

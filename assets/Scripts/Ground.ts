@@ -11,6 +11,7 @@ export class Ground extends Component {
         tooltip:'Ground 1 is here',
     })
     private ground1: Node;
+    // private ground1: UITransform;
 
     @property({
         type:Node,
@@ -29,19 +30,18 @@ export class Ground extends Component {
     private groundWidth2: number;
     private groundWidth3: number;
 
-    private tempStartLocation1 = new Vec3;
-    private tempStartLocation2 = new Vec3;
-    private tempStartLocation3 = new Vec3;
+    private tempStartLocation1 = new Vec3();
+    private tempStartLocation2 = new Vec3();
+    private tempStartLocation3 = new Vec3();
 
     private gameCtrlSpeed = new GameCtrl;
     private gameSpeed: number = 50;
 
-    onLoad() {
+    protected onLoad(): void {
         this.startUp();
-
     }
 
-    startUp(): void {
+    protected startUp(): void {
         this.groundWidth1 = this.ground1.getComponent(UITransform).width;
         this.groundWidth2 = this.ground2.getComponent(UITransform).width;
         this.groundWidth3 = this.ground3.getComponent(UITransform).width;
@@ -56,7 +56,7 @@ export class Ground extends Component {
     }
 
 
-    update(deltaTime: number) {
+    protected update(deltaTime: number): void {
 
         this.gameSpeed = this.gameCtrlSpeed.getSpeedGameCtrl();
         
