@@ -1,31 +1,32 @@
-import { _decorator, Component, Node, Button, director, find, CCInteger } from 'cc';
+import { _decorator, Component, Node, Button, director, find, CCInteger, Sprite } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('ChangeColor')
 export class ChangeColor extends Component {
 
-    private indexObj = null;
-
-    public getIndexObj() {
+    private indexObj;
+     
+    public getIndexObj(){
         return this.indexObj;
     }
 
-    protected onChooseYellow(): void {
-        console.log('Yellow')
-        this.indexObj = 2;
-        console.log(this.indexObj);
+    public getIndex(index : number) : void {
+        if(index === 1){
+            this.indexObj = index;
+            console.log(this.indexObj);
+        }else if(index === 2){ 
+            this.indexObj = index;
+            console.log(this.indexObj);
+        }else if(index === 3) {
+            this.indexObj = index;
+            console.log(this.indexObj);
+        }
     }
 
-    protected onChooseGreen(): void {
-        console.log("Green")
-        this.indexObj = 1
-    }
-
-    protected onChooseRed(): void {
-        console.log("Red")
-        this.indexObj = 3
-        console.log(this.indexObj)
-    }
+    public onButtonClick(event: Event, customEventData: string): void {
+        console.log(customEventData)
+        this.getIndex(parseInt(customEventData));
+    }  
 }
 
 

@@ -1168,6 +1168,7 @@
     },
     "_enabled": true,
     "__prefab": null,
+    "arrayOfNodes": [],
     "_id": "6bDAnISqJAjqdquRtqjlik"
   },
   {
@@ -1401,8 +1402,8 @@
     },
     "component": "",
     "_componentId": "0baebM+PWtEFo7kQCBDPcLs",
-    "handler": "onChooseYellow",
-    "customEventData": ""
+    "handler": "onButtonClick",
+    "customEventData": "2"
   },
   {
     "__type__": "cc.Node",
@@ -1578,8 +1579,8 @@
     },
     "component": "",
     "_componentId": "0baebM+PWtEFo7kQCBDPcLs",
-    "handler": "onChooseGreen",
-    "customEventData": ""
+    "handler": "onButtonClick",
+    "customEventData": "1"
   },
   {
     "__type__": "cc.Node",
@@ -1755,8 +1756,8 @@
     },
     "component": "",
     "_componentId": "0baebM+PWtEFo7kQCBDPcLs",
-    "handler": "onChooseRed",
-    "customEventData": ""
+    "handler": "onButtonClick",
+    "customEventData": "3"
   },
   {
     "__type__": "cc.UITransform",

@@ -1,7 +1,6 @@
 import { _decorator, Component, Node, CCInteger, input, Input, EventKeyboard, KeyCode, director, Contact2DType, Collider2D, IPhysics2DContact, find, Sprite, Color, Button } from 'cc';
 const { ccclass, property } = _decorator;
 
-import { Ground } from './Ground';
 import { Results } from './Results';
 import { Bird } from './Bird';
 import { PipePool } from './PipePool';
@@ -65,7 +64,7 @@ export class GameCtrl extends Component {
         // user choose different bird color
         let colorb = find('StateNode')
         let colorParam = colorb.getComponent(StoredBird)
-        // console.log(colorPara)
+
         if (colorParam.getTemp() === 1) {
             let birdSpriteGreen = this.bird.getComponent(Sprite);
             birdSpriteGreen.color = Color.GREEN;
@@ -83,7 +82,6 @@ export class GameCtrl extends Component {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
 
         this.node.on(Node.EventType.TOUCH_START, () => {
-
             if (this.isOver === true) {
                 this.resetGame();
                 this.bird.resetBird();

@@ -10,15 +10,15 @@ export class StoredBird extends Component {
     })
     private changeColor: ChangeColor;
 
-    private temp: number;
+    private temp;
 
-    public getTemp(): number {
+    public getTemp() {
         return this.temp;
     }
 
-    protected okMenu(): void {
+    protected okMenu(): void  {
         this.temp = this.changeColor.getIndexObj();
-        // console.log(temp)
+        // console.log(this.temp)
         director.addPersistRootNode(this.node);
         director.loadScene('game');
     }
