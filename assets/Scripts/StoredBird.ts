@@ -18,7 +18,6 @@ export class StoredBird extends Component {
 
     protected okMenu(): void  {
         this.temp = this.changeColor.getIndexObj();
-        // console.log(this.temp)
         director.addPersistRootNode(this.node);
         director.loadScene('game');
     }

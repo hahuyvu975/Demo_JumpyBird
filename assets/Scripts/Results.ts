@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Label, director, sys, System } from 'cc';
+import { _decorator, Component, Label} from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('Results')
@@ -24,8 +24,8 @@ export class Results extends Component {
     private currentScore: number;
 
     protected updateScore(num: number): void {
-        this.currentScore = num; // tham số
-        this.scoreLabel.string = ('' + this.currentScore);
+        this.currentScore = num;
+        this.scoreLabel.string = `${this.currentScore}`;
     }
 
     public resetScore(): void {
@@ -51,4 +51,3 @@ export class Results extends Component {
         this.resultEnd.node.active = false;
     }
 }
-

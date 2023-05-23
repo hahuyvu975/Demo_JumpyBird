@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, AudioClip, AudioSource, director, resources } from 'cc';
+import { _decorator, Component, AudioClip, AudioSource} from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('AudioCtrl')
@@ -24,6 +24,5 @@ export class AudioCtrl extends Component {
     public pausePlaySoundEffect(): void {
         this.audio_source.pause();
     }
-
 }
 

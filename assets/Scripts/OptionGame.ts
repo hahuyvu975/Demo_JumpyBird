@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Button, Label, director, find, Sprite } from 'cc';
+import { _decorator, Component, director} from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('OptionGame')

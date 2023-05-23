@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, Prefab, NodePool, instantiate } from 'cc';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('PipePool')
@@ -15,16 +16,15 @@ export class PipePool extends Component {
     private pipePoolHome;
 
     private pool = new NodePool();
-    private createPipe;
+    private createPipe: Node = null;
 
     protected initPool(): void {
-         let initCount = 3;
-         for(let i = 0; i < initCount; i++) {
-            this.createPipe = instantiate(this.prefabPipes)
+         for(let i = 0; i < 3; i++) {
+            this.createPipe = instantiate(this.prefabPipes);
             if(i === 0) {
-                this.pipePoolHome.addChild(this.createPipe)
+                this.pipePoolHome.addChild(this.createPipe);
             } else {
-                this.pool.put(this.createPipe)
+                this.pool.put(this.createPipe);
             }
          }   
     }
@@ -33,9 +33,9 @@ export class PipePool extends Component {
         if(this.pool.size() > 0) {
             this.createPipe = this.pool.get();
         } else {
-            this.createPipe = instantiate(this.prefabPipes)
+            this.createPipe = instantiate(this.prefabPipes);
         }
-        this.pipePoolHome.addChild(this.createPipe)
+        this.pipePoolHome.addChild(this.createPipe);
     }
 
     public reset(): void {

@@ -1,16 +1,15 @@
-import { _decorator, Component, Node, Button, Label, find, game, director, AudioSource } from 'cc';
+import { _decorator, Component, director} from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('MenuGame')
 export class MenuGame extends Component {
 
     protected playGame(): void {
-        director.loadScene('game')
-        // this.gameCtrl.node.active = true;
+        director.loadScene('game');
     }
 
     protected option(): void {
-        director.loadScene('option')
+        director.loadScene('option');
     }
 }
 

@@ -1,4 +1,7 @@
-import { _decorator, Component, Node, Vec3, screen, math, find, UITransform, randomRange } from 'cc';
+import { _decorator, Component, Node, Vec3, screen, math, find, UITransform} from 'cc';
+
+import { GameCtrl } from './GameCtrl';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('Pipes')
@@ -16,18 +19,19 @@ export class Pipes extends Component {
     })
     private bottomPipe: Node;
 
+    private game: any;
+
     private tempStartLocationUp: Vec3 = new Vec3(0, 0, 0);
     private tempStartLocationDown: Vec3 = new Vec3(0, 0, 0);
     private scene = screen.windowSize; // set window size game
-
-    private game: any; // 
+ 
     private pipeSpeed: number; // speed of the pipe
     private tempSpeed: number; // speed of the temp
 
     private isPass: boolean;
 
     protected onLoad(): void {
-        this.game = find("GameCtrl").getComponent('GameCtrl');
+        this.find();
         this.pipeSpeed = this.game.pipeSpeed;
         this.initPos();
         this.isPass = false;
@@ -66,9 +70,13 @@ export class Pipes extends Component {
 
         if (this.topPipe.position.x < -960) {
             this.destroy();
-            // console.log('123');
             this.game.createPipe();
         }
+    }
+
+    private find() {
+        this.game = find('GameCtrl').getComponent(GameCtrl);
+
     }
 }
 

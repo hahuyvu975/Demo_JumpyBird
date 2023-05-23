@@ -5,7 +5,6 @@ import { Results } from './Results';
 import { Bird } from './Bird';
 import { PipePool } from './PipePool';
 import { AudioCtrl } from './AudioCtrl';
-import { StoredBird } from './StoredBird';
 
 @ccclass('GameCtrl')
 export class GameCtrl extends Component {
@@ -13,7 +12,7 @@ export class GameCtrl extends Component {
         type: Results,
         tooltip: 'results go here'
     })
-    private result: Results
+    private result: Results;
 
     @property({
         type: Bird
@@ -39,18 +38,22 @@ export class GameCtrl extends Component {
     @property({
         type: CCInteger,
     })
-    private speed: number = 300;
+    private _speed: number = 300;
 
+    public get speed(): number {
+        return this._speed;
+    }
+    
     @property({
         type: CCInteger,
     })
-    private pipeSpeed: number = 200;
+    private _pipeSpeed: number = 200;
 
-    private isOver: boolean;
-
-    public getSpeedGameCtrl() {
-        return this.speed;
+    public get pipeSpeed(): number {
+        return this._pipeSpeed;
     }
+    
+    private isOver: boolean;
 
     protected onLoad(): void {
         //User need to click for start
@@ -61,20 +64,6 @@ export class GameCtrl extends Component {
         this.isOver = true;
         //Game pause when start
         director.pause();
-        // user choose different bird color
-        let colorb = find('StateNode')
-        let colorParam = colorb.getComponent(StoredBird)
-
-        if (colorParam.getTemp() === 1) {
-            let birdSpriteGreen = this.bird.getComponent(Sprite);
-            birdSpriteGreen.color = Color.GREEN;
-        } else if (colorParam.getTemp() === 2) {
-            let birdSpriteYellow = this.bird.getComponent(Sprite);
-            birdSpriteYellow.color = Color.YELLOW;
-        } else {
-            let birdSpriteRed = this.bird.getComponent(Sprite);
-            birdSpriteRed.color = Color.RED;
-        }
     }
 
     protected initListener(): void {
@@ -90,7 +79,7 @@ export class GameCtrl extends Component {
             if (this.isOver === false) {
                 this.bird.fly();
                 if (this.btnSound.getChildByName('btnOn').active === true) {
-                    this.audioCtrl.onPlaySoundEffect(0)
+                    this.audioCtrl.onPlaySoundEffect(0);
                 }
             }
         })
@@ -116,34 +105,34 @@ export class GameCtrl extends Component {
 
     protected startGame(): void {
         this.result.hideResults();
-        director.resume()
+        director.resume();
     }
 
     protected gameOver(): void {
-        this.result.showResults()
+        this.result.showResults();
         this.isOver = true;
         director.pause();
         if (this.btnSound.getChildByName('btnOn').active === true) {
-            this.audioCtrl.onPlaySoundEffect(3)
+            this.audioCtrl.onPlaySoundEffect(3);
         }
     }
 
     protected resetGame(): void {
-        this.result.resetScore()
-        this.pipeQueue.reset()
+        this.result.resetScore();
+        this.pipeQueue.reset();
         this.isOver = false;
-        this.startGame()
+        this.startGame();
     }
 
     //action pass pipe
-    protected passPipe(): void {
-        this.result.addScore()
+    public passPipe(): void {
+        this.result.addScore();
         if (this.btnSound.getChildByName('btnOn').active === true) {
-            this.audioCtrl.onPlaySoundEffect(1)
+            this.audioCtrl.onPlaySoundEffect(1);
         }
     }
 
-    protected createPipe(): void {
+    public createPipe(): void {
         this.pipeQueue.addPool();
     }
 
@@ -151,21 +140,21 @@ export class GameCtrl extends Component {
     protected contactGroundPipe(): void {
         let collider = this.bird.getComponent(Collider2D)
         if (collider) {
-            collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this)
+            collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
         }
     }
 
     protected onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null): void {
         this.bird.hitSomething = true;
         if (this.btnSound.getChildByName('btnOn').active === true) {
-            this.audioCtrl.onPlaySoundEffect(2)
+            this.audioCtrl.onPlaySoundEffect(2);
         }
     }
 
     protected birdStruck(): void {
         this.contactGroundPipe();
         if (this.bird.hitSomething === true) {
-            this.gameOver()
+            this.gameOver();
         }
     }
 
@@ -175,4 +164,3 @@ export class GameCtrl extends Component {
         }
     }
 }
-
