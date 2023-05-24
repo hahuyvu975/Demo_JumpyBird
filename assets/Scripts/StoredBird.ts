@@ -1,6 +1,8 @@
 import { _decorator, Component, Node, director } from 'cc';
-import { ChangeColor } from './ChangeColor';
 const { ccclass, property } = _decorator;
+
+import { Constants } from './Constants';
+import { ChangeColor } from './ChangeColor';
 
 @ccclass('StoredBird')
 export class StoredBird extends Component {
@@ -18,8 +20,9 @@ export class StoredBird extends Component {
 
     protected okMenu(): void  {
         this.temp = this.changeColor.getIndexObj();
+        console.log(this.temp);
         director.addPersistRootNode(this.node);
-        director.loadScene('game');
+        director.loadScene(Constants.GameScene);
     }
 }
 

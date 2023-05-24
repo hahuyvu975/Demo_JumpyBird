@@ -1,11 +1,13 @@
 import { _decorator, Component, director} from 'cc';
 const { ccclass, property } = _decorator;
 
+import { Constants } from './Constants';
+
 @ccclass('OptionGame')
 export class OptionGame extends Component {
 
-    protected backMenu(): void {
-        director.loadScene('entry');
+    public backMenu(): void {
+        director.loadScene(Constants.EntryScene);
     }
 }
 

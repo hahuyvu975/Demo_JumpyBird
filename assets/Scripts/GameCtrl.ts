@@ -5,6 +5,7 @@ import { Results } from './Results';
 import { Bird } from './Bird';
 import { PipePool } from './PipePool';
 import { AudioCtrl } from './AudioCtrl';
+import { StoredBird } from './StoredBird';
 
 @ccclass('GameCtrl')
 export class GameCtrl extends Component {
@@ -64,6 +65,21 @@ export class GameCtrl extends Component {
         this.isOver = true;
         //Game pause when start
         director.pause();
+
+        //change color bird
+        const color = find('StateNode')
+        const colorParam = color.getComponent(StoredBird)
+        let spriteBird = this.bird.getComponent(Sprite)
+        if(colorParam.getTemp() === 1) {
+            let changeColorGreen = spriteBird;
+            changeColorGreen.color = Color.GREEN;
+        }else if(colorParam.getTemp() === 2){
+            let changeColorYellow = spriteBird;
+            changeColorYellow.color = Color.YELLOW;
+        }else {
+            let changeColorRed = spriteBird;
+            changeColorRed.color = Color.RED;
+        }
     }
 
     protected initListener(): void {

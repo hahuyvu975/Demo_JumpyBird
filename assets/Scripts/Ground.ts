@@ -23,13 +23,13 @@ export class Ground extends Component {
     }
 
     public startUp() {
-        for (let i = 0; i < this.groundWidth.length; i++) {
-            this.groundWidth.push(this.ground[i].getComponent(UITransform).width);
-        }
-        for (let i = 0; i < 3; i++) {
-            let temp = 320 * i;
-            this.ground[i].setPosition(temp, 0, 0);
-        }
+        // for (let i = 0; i < this.groundWidth.length; i++) {
+        //     this.groundWidth.push(this.ground[i].getComponent(UITransform).width);
+        // }
+        // for (let i = 0; i < 3; i++) {
+        //     let temp = 320 * i;
+        //     this.ground[i].setPosition(temp, 0, 0);
+        // }
     }
 
     protected update(deltaTime: number): void {

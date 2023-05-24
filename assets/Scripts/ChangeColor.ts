@@ -1,4 +1,4 @@
-import { _decorator, Component} from 'cc';
+import { _decorator, Component, director} from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('ChangeColor')
@@ -18,6 +18,7 @@ export class ChangeColor extends Component {
 
     public onButtonClick(event: Event, customEventData: string): void {
         this.getIndex(parseInt(customEventData));
+        console.log(customEventData);
     }  
 }
 
